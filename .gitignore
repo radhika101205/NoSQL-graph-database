@@ -1,0 +1,16 @@
+# Ignore build artifacts
+*.o
+*.out
+*.exe
+*.a
+*.so
+
+# VS Code settings
+.vscode/
+
+# CMake build directories
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
