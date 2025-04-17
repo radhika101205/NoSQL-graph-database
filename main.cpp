@@ -1,55 +1,32 @@
-#include "graphdb.hpp"
+#include "include/graphdb.hpp"
 #include <iostream>
 
-using namespace std;
-
 int main() {
-    GraphDB db;
+    GraphDB graph;
 
-    // Add nodes
-    db.addNode(1);
-    db.addNode(2);
+    // Adding nodes
+    graph.addNode(1);
+    graph.addNode(2);
+    graph.addNode(3);
+    graph.addNode(4);
+    graph.addNode(5);
 
-    // Add properties to nodes
-    db.updateNodeProperty(1, "name", PropertyValue("Node A"));
-    db.updateNodeProperty(1, "age", PropertyValue(25));
-    db.updateNodeProperty(2, "name", PropertyValue("Node B"));
-    db.updateNodeProperty(2, "temperature", PropertyValue(36.6f));
+    // Adding edges
+    graph.addEdge(101, 1, 2);
+    graph.addEdge(102, 1, 3);
+    graph.addEdge(103, 2, 4);
+    graph.addEdge(104, 3, 5);
+    graph.addEdge(105, 4, 5);
 
-    // Add an edge
-    db.addEdge(100, 1, 2);
-    db.updateEdgeProperty(100, "weight", PropertyValue(10));
-    db.updateEdgeProperty(100, "label", PropertyValue("A_to_B"));
+    std::cout << "BFS starting from node 1:\n";
+    graph.bfs(1, [](int nodeId) {
+        std::cout << "Visited (BFS): " << nodeId << std::endl;
+    });
 
-    // Display Node 1 Properties
-    cout << "Properties of Node 1:\n";
-    auto node1 = db.getNode(1);
-    if (node1) {
-        for (const auto& p : node1->getProperties()) {
-            cout << "  " << p.first << " = ";
-            switch (p.second.type) {
-                case PropertyType::INT: cout << p.second.intValue; break;
-                case PropertyType::FLOAT: cout << p.second.floatValue; break;
-                case PropertyType::STRING: cout << p.second.stringValue; break;
-            }
-            cout << endl;
-        }
-    }
-
-    // Display Edge 100 Properties
-    cout << "\nProperties of Edge 100:\n";
-    auto edge = db.getEdge(100);
-    if (edge) {
-        for (const auto& p : edge->getProperties()) {
-            cout << "  " << p.first << " = ";
-            switch (p.second.type) {
-                case PropertyType::INT: cout << p.second.intValue; break;
-                case PropertyType::FLOAT: cout << p.second.floatValue; break;
-                case PropertyType::STRING: cout << p.second.stringValue; break;
-            }
-            cout << endl;
-        }
-    }
+    std::cout << "\nDFS starting from node 1:\n";
+    graph.dfs(1, [](int nodeId) {
+        std::cout << "Visited (DFS): " << nodeId << std::endl;
+    });
 
     return 0;
 }

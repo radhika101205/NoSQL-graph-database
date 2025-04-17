@@ -5,6 +5,11 @@
 #include <unordered_map>
 #include <memory>
 #include <string>
+#include <functional>
+#include <vector>
+#include <set>
+#include <queue>
+#include <stack>
 
 using namespace std;
 
@@ -29,4 +34,9 @@ public:
     // Utility
     bool hasNode(int nodeId) const;
     bool hasEdge(int edgeId) const;
+
+    // Traversal
+    void bfs(int startNodeId, function<void(int)> visit);
+    void dfs(int startNodeId, function<void(int)> visit);
+    vector<int> getAdjacentNodes(int nodeId) const;
 };

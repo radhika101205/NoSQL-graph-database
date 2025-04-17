@@ -89,3 +89,66 @@ bool GraphDB::hasNode(int nodeId) const {
 bool GraphDB::hasEdge(int edgeId) const {
     return edges.find(edgeId) != edges.end();
 }
+
+// Get adjacent nodes
+vector<int> GraphDB::getAdjacentNodes(int nodeId) const {
+    vector<int> neighbors;
+    for (const auto& pair : edges) {
+        if (pair.second->getSource() == nodeId) {
+            neighbors.push_back(pair.second->getTarget());
+        }
+    }
+    return neighbors;
+}
+
+// BFS
+void GraphDB::bfs(int startNodeId, function<void(int)> visit) {
+    set<int> visited;
+    queue<int> q;
+
+    if (!hasNode(startNodeId)) return;
+
+    q.push(startNodeId);
+    visited.insert(startNodeId);
+
+    while (!q.empty()) {
+        int current = q.front();
+        q.pop();
+        visit(current);
+
+        for (int neighbor : getAdjacentNodes(current)) {
+            if (visited.find(neighbor) == visited.end()) {
+                visited.insert(neighbor);
+                q.push(neighbor);
+            }
+        }
+    }
+}
+
+// DFS
+void GraphDB::dfs(int startNodeId, function<void(int)> visit) {
+    set<int> visited;
+    stack<int> stack;
+
+    if (!hasNode(startNodeId)) return;
+
+    stack.push(startNodeId);
+
+    while (!stack.empty()) {
+        int current = stack.top();
+        stack.pop();
+
+        if (visited.find(current) == visited.end()) {
+            visit(current);
+            visited.insert(current);
+
+            // Reverse order for DFS to maintain logical order
+            vector<int> neighbors = getAdjacentNodes(current);
+            for (auto it = neighbors.rbegin(); it != neighbors.rend(); ++it) {
+                if (visited.find(*it) == visited.end()) {
+                    stack.push(*it);
+                }
+            }
+        }
+    }
+}
