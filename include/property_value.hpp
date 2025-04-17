@@ -1,19 +1,18 @@
 #pragma once
+
 #include <string>
 
-using namespace std; 
+enum class PropertyType { INT, FLOAT, STRING };
 
-class PropertyValue {
-    string value; 
-    string type;  
-public:
+struct PropertyValue {
+    PropertyType type;
+    int intValue;
+    float floatValue;
+    std::string stringValue;
+
     PropertyValue() = default;
-    PropertyValue(int v) : value(to_string(v)), type("int") {}  
-    PropertyValue(float v) : value(to_string(v)), type("float") {}
-    PropertyValue(const string& v) : value(v), type("string") {}
 
-    string getType() const { return type; }
-    int asInt() const { return stoi(value); }     
-    float asFloat() const { return stof(value); } 
-    string asString() const { return value; }
+    PropertyValue(int val) : type(PropertyType::INT), intValue(val) {}
+    PropertyValue(float val) : type(PropertyType::FLOAT), floatValue(val) {}
+    PropertyValue(const std::string& val) : type(PropertyType::STRING), stringValue(val) {}
 };

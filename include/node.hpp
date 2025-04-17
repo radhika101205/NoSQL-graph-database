@@ -3,11 +3,16 @@
 #include <unordered_map>
 #include "property_value.hpp"
 
+using namespace std;
+
 struct Node {
     int id;
-    std::unordered_map<std::string, PropertyValue> properties;
+    unordered_map<string, PropertyValue> properties;
 
     Node(int nodeId);
-    void setProperty(const std::string& key, const PropertyValue& value);
-    PropertyValue getProperty(const std::string& key) const;
+    void setProperty(const string& key, const PropertyValue& value);
+    PropertyValue getProperty(const string& key) const;
+    int getId() const { return id; }
+
+    const  unordered_map< string, PropertyValue>& getProperties() const;
 };

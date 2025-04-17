@@ -1,14 +1,20 @@
-#include "node.hpp"
+#include "../include/node.hpp"
 #include <stdexcept>
 
-Node::Node(int nodeId) : id(nodeId) {}
 
-void Node::setProperty(const std::string& key, const PropertyValue& value) {
+Node::Node(int id) : id(id) {}
+
+void Node::setProperty(const string& key, const PropertyValue& value) {
     properties[key] = value;
 }
 
-PropertyValue Node::getProperty(const std::string& key) const {
+PropertyValue Node::getProperty(const string& key) const {
     auto it = properties.find(key);
     if (it != properties.end()) return it->second;
-    throw std::runtime_error("Property not found");
+    throw runtime_error("Property not found");
+}
+
+// ✅ Add this implementation
+const unordered_map<string, PropertyValue>& Node::getProperties() const {
+    return properties;
 }
