@@ -1,5 +1,7 @@
 #include "../include/graphdb.hpp"
 #include <iostream>
+#include <limits>  
+#include <algorithm>
 
 using namespace std;
 
@@ -45,7 +47,7 @@ void GraphDB::updateNodeProperty(int nodeId, const string& key, const PropertyVa
 }
 
 // Add an edge
-void GraphDB::addEdge(int edgeId, int sourceId, int targetId) {
+void GraphDB::addEdge(int edgeId, int sourceId, int targetId, double weight) {
     if (edges.find(edgeId) != edges.end()) {
         cout << "Edge " << edgeId << " already exists.\n";
         return;
@@ -56,7 +58,9 @@ void GraphDB::addEdge(int edgeId, int sourceId, int targetId) {
         return;
     }
 
-    edges[edgeId] = make_shared<Edge>(edgeId, sourceId, targetId);
+    auto edge = make_shared<Edge>(edgeId, sourceId, targetId);
+    edge->setProperty("weight", PropertyValue(weight));
+    edges[edgeId] = edge;
 }
 
 // Get an edge
@@ -151,4 +155,73 @@ void GraphDB::dfs(int startNodeId, function<void(int)> visit) {
             }
         }
     }
+}
+
+//Dijkstra's algo
+
+vector<int> GraphDB::dijkstra(int startNodeId, unordered_map<int, vector<int>>& paths) {
+    // Step 1: Initialize distances and priority queue
+    unordered_map<int, int> dist; // Node ID -> Distance
+    unordered_map<int, int> previous; // Node ID -> Previous node
+    
+    // Initialize distances to infinity (except for the start node)
+    for (auto& node : nodes) {
+        dist[node.first] = numeric_limits<int>::max();  // Initially set to infinity
+        previous[node.first] = -1;  // No previous node
+    }
+
+    dist[startNodeId] = 0; // The start node distance is always 0
+
+    // Priority queue to select the node with the smallest distance
+    auto compare = [&dist](int left, int right) {
+        return dist[left] > dist[right];
+    };
+
+    priority_queue<int, vector<int>, decltype(compare)> pq(compare);
+    pq.push(startNodeId);
+
+    while (!pq.empty()) {
+        int currentNode = pq.top();
+        pq.pop();
+
+        // Process neighbors of the current node
+        for (auto& edge : edges) {
+            if (edge.second->getSource() == currentNode) {
+                int neighborNode = edge.second->getTarget();
+                double edgeWeight = edge.second->getProperty("weight").getFloat(); // Get the weight of the edge
+                int newDist = dist[currentNode] + edgeWeight; // Add the edge weight
+
+                // Check if a shorter path to the neighbor is found
+                if (newDist < dist[neighborNode]) {
+                    dist[neighborNode] = newDist;
+                    previous[neighborNode] = currentNode; // Record the path
+                    pq.push(neighborNode);
+                }
+            }
+        }
+    }
+
+    // Path reconstruction: backtrack from each node
+    for (auto& d : dist) {
+        int currentNode = d.first;
+        vector<int> path;
+        
+        // Backtrack to reconstruct the path
+        while (currentNode != -1) {
+            path.push_back(currentNode);
+            currentNode = previous[currentNode];
+        }
+
+        // Reverse the path to get it from start to destination
+        reverse(path.begin(), path.end());
+        paths[currentNode] = path;  // Save the reconstructed path
+    }
+
+    // Return the distance map as a vector
+    vector<int> result;
+    for (auto& d : dist) {
+        result.push_back(d.second);
+    }
+
+    return result;
 }

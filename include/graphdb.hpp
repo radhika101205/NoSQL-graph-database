@@ -26,7 +26,7 @@ public:
     void updateNodeProperty(int nodeId, const string& key, const PropertyValue& value);
 
     // Edge operations
-    void addEdge(int edgeId, int sourceId, int targetId);
+    void addEdge(int edgeId, int sourceId, int targetId, double weight = 1.0);
     shared_ptr<Edge> getEdge(int edgeId);
     void deleteEdge(int edgeId);
     void updateEdgeProperty(int edgeId, const string& key, const PropertyValue& value);
@@ -39,4 +39,7 @@ public:
     void bfs(int startNodeId, function<void(int)> visit);
     void dfs(int startNodeId, function<void(int)> visit);
     vector<int> getAdjacentNodes(int nodeId) const;
+
+    //Dijstra's algorithm
+    vector<int> dijkstra(int startNodeId,unordered_map<int, vector<int>>& paths);
 };
