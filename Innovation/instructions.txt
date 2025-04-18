@@ -1,0 +1,16 @@
+g++ visualize.cpp -o visualize -lsfml-graphics -lsfml-window -lsfml-system
+./visualize
+
+g++ input.cpp -o runme -lsfml-graphics -lsfml-window -lsfml-system
+./runme
+
+g++ input.cpp visualize.cpp -o runme -lsfml-graphics -lsfml-window -lsfml-system
+
+g++ append_to_db.cpp -o append_db
+./append_db
+
+g++ jsontograph.cpp -o jsontograph
+./jsontograph
+
+g++ dboperations.cpp -o dboperations
+./dboperations

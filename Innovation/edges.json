@@ -1,0 +1,172 @@
+[
+  {
+    "source": "Sundar Pichai",
+    "target": "Google",
+    "relation": "works_at"
+  },
+  {
+    "source": "Google",
+    "target": "AI",
+    "relation": "related"
+  },
+  {
+    "source": "AI",
+    "target": "Toronto",
+    "relation": "related"
+  },
+  {
+    "source": "Toronto",
+    "target": "Canada",
+    "relation": "related"
+  },
+  {
+    "source": "Canada",
+    "target": "Sa",
+    "relation": "related"
+  },
+  {
+    "source": "Sa",
+    "target": "##ty",
+    "relation": "related"
+  },
+  {
+    "source": "##ty",
+    "target": "##a Nadella",
+    "relation": "related"
+  },
+  {
+    "source": "##a Nadella",
+    "target": "Microsoft",
+    "relation": "works_at"
+  },
+  {
+    "source": "Microsoft",
+    "target": "Alice Thompson",
+    "relation": "related"
+  },
+  {
+    "source": "Alice Thompson",
+    "target": "Amazon",
+    "relation": "works_at"
+  },
+  {
+    "source": "Amazon",
+    "target": "Seattle",
+    "relation": "located_in"
+  },
+  {
+    "source": "Seattle",
+    "target": "Washington",
+    "relation": "related"
+  },
+  {
+    "source": "Washington",
+    "target": "San Francisco",
+    "relation": "related"
+  },
+  {
+    "source": "San Francisco",
+    "target": "AI",
+    "relation": "related"
+  },
+  {
+    "source": "AI",
+    "target": "Amazon",
+    "relation": "related"
+  },
+  {
+    "source": "Amazon",
+    "target": "Seattle",
+    "relation": "located_in"
+  },
+  {
+    "source": "Seattle",
+    "target": "Meta",
+    "relation": "related"
+  },
+  {
+    "source": "Meta",
+    "target": "Menlo Park",
+    "relation": "located_in"
+  },
+  {
+    "source": "Menlo Park",
+    "target": "California",
+    "relation": "related"
+  },
+  {
+    "source": "California",
+    "target": "Alice",
+    "relation": "related"
+  },
+  {
+    "source": "Alice",
+    "target": "Yellowstone National Park",
+    "relation": "lives_in"
+  },
+  {
+    "source": "Yellowstone National Park",
+    "target": "David Lee",
+    "relation": "related"
+  },
+  {
+    "source": "David Lee",
+    "target": "Boston Dynamics",
+    "relation": "works_at"
+  },
+  {
+    "source": "Boston Dynamics",
+    "target": "Waltham",
+    "relation": "located_in"
+  },
+  {
+    "source": "Waltham",
+    "target": "Massachusetts",
+    "relation": "related"
+  },
+  {
+    "source": "Massachusetts",
+    "target": "Sundar",
+    "relation": "related"
+  },
+  {
+    "source": "Sundar",
+    "target": "Berlin",
+    "relation": "lives_in"
+  },
+  {
+    "source": "Berlin",
+    "target": "Germany",
+    "relation": "related"
+  },
+  {
+    "source": "Germany",
+    "target": "EU",
+    "relation": "related"
+  },
+  {
+    "source": "EU",
+    "target": "AI",
+    "relation": "related"
+  },
+  {
+    "source": "AI",
+    "target": "Jensen Huang",
+    "relation": "related"
+  },
+  {
+    "source": "Jensen Huang",
+    "target": "N",
+    "relation": "works_at"
+  },
+  {
+    "source": "Seoul",
+    "target": "South Korea",
+    "relation": "related"
+  },
+  {
+    "source": "South Korea",
+    "target": "GPU",
+    "relation": "related"
+  }
+]

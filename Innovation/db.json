@@ -1,0 +1,327 @@
+[
+  {
+    "relation": "located_in",
+    "source": "Tesla",
+    "target": "Shanghai"
+  },
+  {
+    "relation": "related",
+    "source": "Shanghai",
+    "target": "China"
+  },
+  {
+    "relation": "related",
+    "source": "China",
+    "target": "Sam Altman"
+  },
+  {
+    "relation": "works_at",
+    "source": "Sam Altman",
+    "target": "OpenAI"
+  },
+  {
+    "relation": "related",
+    "source": "OpenAI",
+    "target": "AI"
+  },
+  {
+    "relation": "related",
+    "source": "AI",
+    "target": "Jane Smith"
+  },
+  {
+    "relation": "works_at",
+    "source": "Jane Smith",
+    "target": "Google"
+  },
+  {
+    "relation": "located_in",
+    "source": "Google",
+    "target": "Mountain View"
+  },
+  {
+    "relation": "related",
+    "source": "Mountain View",
+    "target": "California"
+  },
+  {
+    "relation": "related",
+    "source": "California",
+    "target": "New York"
+  },
+  {
+    "relation": "related",
+    "source": "New York",
+    "target": "Google"
+  },
+  {
+    "relation": "located_in",
+    "source": "Google",
+    "target": "Silicon Valley"
+  },
+  {
+    "relation": "related",
+    "source": "Silicon Valley",
+    "target": "Microsoft"
+  },
+  {
+    "relation": "located_in",
+    "source": "Microsoft",
+    "target": "Redmond"
+  },
+  {
+    "relation": "related",
+    "source": "Redmond",
+    "target": "Washington"
+  },
+  {
+    "relation": "related",
+    "source": "Washington",
+    "target": "Jane"
+  },
+  {
+    "relation": "lives_in",
+    "source": "Jane",
+    "target": "Yosemite National Park"
+  },
+  {
+    "relation": "related",
+    "source": "Yosemite National Park",
+    "target": "Mark Johnson"
+  },
+  {
+    "relation": "works_at",
+    "source": "Mark Johnson",
+    "target": "SpaceX"
+  },
+  {
+    "relation": "located_in",
+    "source": "SpaceX",
+    "target": "Hawthorne"
+  },
+  {
+    "relation": "related",
+    "source": "Hawthorne",
+    "target": "California"
+  },
+  {
+    "relation": "related",
+    "source": "California",
+    "target": "Elon"
+  },
+  {
+    "relation": "located_in",
+    "source": "Elon",
+    "target": "London"
+  },
+  {
+    "relation": "related",
+    "source": "London",
+    "target": "UK"
+  },
+  {
+    "relation": "related",
+    "source": "UK",
+    "target": "DeepMind"
+  },
+  {
+    "relation": "related",
+    "source": "DeepMind",
+    "target": "Tim Cook"
+  },
+  {
+    "relation": "works_at",
+    "source": "Tim Cook",
+    "target": "Apple"
+  },
+  {
+    "relation": "located_in",
+    "source": "Apple",
+    "target": "Tokyo"
+  },
+  {
+    "relation": "related",
+    "source": "Tokyo",
+    "target": "Japan"
+  },
+  {
+    "relation": "works_at",
+    "source": "John Doe",
+    "target": "OpenAI"
+  },
+  {
+    "relation": "located_in",
+    "source": "OpenAI",
+    "target": "San Francisco"
+  },
+  {
+    "relation": "works_at",
+    "source": "Sundar Pichai",
+    "target": "Google"
+  },
+  {
+    "relation": "related",
+    "source": "Google",
+    "target": "AI"
+  },
+  {
+    "relation": "related",
+    "source": "AI",
+    "target": "Toronto"
+  },
+  {
+    "relation": "related",
+    "source": "Toronto",
+    "target": "Canada"
+  },
+  {
+    "relation": "related",
+    "source": "Canada",
+    "target": "Sa"
+  },
+  {
+    "relation": "related",
+    "source": "Sa",
+    "target": "##ty"
+  },
+  {
+    "relation": "related",
+    "source": "##ty",
+    "target": "##a Nadella"
+  },
+  {
+    "relation": "works_at",
+    "source": "##a Nadella",
+    "target": "Microsoft"
+  },
+  {
+    "relation": "related",
+    "source": "Microsoft",
+    "target": "Alice Thompson"
+  },
+  {
+    "relation": "works_at",
+    "source": "Alice Thompson",
+    "target": "Amazon"
+  },
+  {
+    "relation": "located_in",
+    "source": "Amazon",
+    "target": "Seattle"
+  },
+  {
+    "relation": "related",
+    "source": "Seattle",
+    "target": "Washington"
+  },
+  {
+    "relation": "related",
+    "source": "Washington",
+    "target": "San Francisco"
+  },
+  {
+    "relation": "related",
+    "source": "San Francisco",
+    "target": "AI"
+  },
+  {
+    "relation": "related",
+    "source": "AI",
+    "target": "Amazon"
+  },
+  {
+    "relation": "located_in",
+    "source": "Amazon",
+    "target": "Seattle"
+  },
+  {
+    "relation": "related",
+    "source": "Seattle",
+    "target": "Meta"
+  },
+  {
+    "relation": "located_in",
+    "source": "Meta",
+    "target": "Menlo Park"
+  },
+  {
+    "relation": "related",
+    "source": "Menlo Park",
+    "target": "California"
+  },
+  {
+    "relation": "related",
+    "source": "California",
+    "target": "Alice"
+  },
+  {
+    "relation": "lives_in",
+    "source": "Alice",
+    "target": "Yellowstone National Park"
+  },
+  {
+    "relation": "related",
+    "source": "Yellowstone National Park",
+    "target": "David Lee"
+  },
+  {
+    "relation": "works_at",
+    "source": "David Lee",
+    "target": "Boston Dynamics"
+  },
+  {
+    "relation": "located_in",
+    "source": "Boston Dynamics",
+    "target": "Waltham"
+  },
+  {
+    "relation": "related",
+    "source": "Waltham",
+    "target": "Massachusetts"
+  },
+  {
+    "relation": "related",
+    "source": "Massachusetts",
+    "target": "Sundar"
+  },
+  {
+    "relation": "lives_in",
+    "source": "Sundar",
+    "target": "Berlin"
+  },
+  {
+    "relation": "related",
+    "source": "Berlin",
+    "target": "Germany"
+  },
+  {
+    "relation": "related",
+    "source": "Germany",
+    "target": "EU"
+  },
+  {
+    "relation": "related",
+    "source": "EU",
+    "target": "AI"
+  },
+  {
+    "relation": "related",
+    "source": "AI",
+    "target": "Jensen Huang"
+  },
+  {
+    "relation": "works_at",
+    "source": "Jensen Huang",
+    "target": "N"
+  },
+  {
+    "relation": "related",
+    "source": "Seoul",
+    "target": "South Korea"
+  },
+  {
+    "relation": "related",
+    "source": "South Korea",
+    "target": "GPU"
+  }
+]
