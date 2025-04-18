@@ -159,20 +159,20 @@ void GraphDB::dfs(int startNodeId, function<void(int)> visit) {
 
 //Dijkstra's algo
 
-vector<int> GraphDB::dijkstra(int startNodeId, unordered_map<int, vector<int>>& paths) {
+vector<double> GraphDB::dijkstra(int startNodeId, unordered_map<int, vector<int>>& paths) {
     // Step 1: Initialize distances and priority queue
-    unordered_map<int, int> dist; // Node ID -> Distance
+    unordered_map<int, double> dist; // Node ID -> Distance
     unordered_map<int, int> previous; // Node ID -> Previous node
     
     // Initialize distances to infinity (except for the start node)
     for (auto& node : nodes) {
-        dist[node.first] = numeric_limits<int>::max();  // Initially set to infinity
+        dist[node.first] = numeric_limits<double>::infinity();  // Initially set to infinity
         previous[node.first] = -1;  // No previous node
     }
 
-    dist[startNodeId] = 0; // The start node distance is always 0
+    dist[startNodeId] = 0; // Start node distance is 0
 
-    // Priority queue to select the node with the smallest distance
+    // Priority queue to select node with smallest distance
     auto compare = [&dist](int left, int right) {
         return dist[left] > dist[right];
     };
@@ -184,43 +184,45 @@ vector<int> GraphDB::dijkstra(int startNodeId, unordered_map<int, vector<int>>& 
         int currentNode = pq.top();
         pq.pop();
 
-        // Process neighbors of the current node
-        for (auto& edge : edges) {
-            if (edge.second->getSource() == currentNode) {
-                int neighborNode = edge.second->getTarget();
-                double edgeWeight = edge.second->getProperty("weight").getFloat(); // Get the weight of the edge
-                int newDist = dist[currentNode] + edgeWeight; // Add the edge weight
+        // Process neighbors
+        for (const auto& edgePair : edges) {
+            auto edge = edgePair.second;
+            if (edge->getSource() != currentNode) continue;
 
-                // Check if a shorter path to the neighbor is found
-                if (newDist < dist[neighborNode]) {
-                    dist[neighborNode] = newDist;
-                    previous[neighborNode] = currentNode; // Record the path
-                    pq.push(neighborNode);
-                }
+            int neighbor = edge->getTarget();
+            double weight = edge->getProperty("weight").getFloat();
+            double newDist = dist[currentNode] + weight;
+
+            if (newDist < dist[neighbor]) {
+                dist[neighbor] = newDist;
+                previous[neighbor] = currentNode;
+                pq.push(neighbor);
             }
         }
     }
 
-    // Path reconstruction: backtrack from each node
-    for (auto& d : dist) {
-        int currentNode = d.first;
+    // Reconstruct paths from startNode to every other node
+    for (const auto& pair : nodes) {
+        int target = pair.first;
         vector<int> path;
-        
-        // Backtrack to reconstruct the path
-        while (currentNode != -1) {
-            path.push_back(currentNode);
-            currentNode = previous[currentNode];
+        int current = target;
+
+        // Skip unreachable nodes
+        if (dist[current] == numeric_limits<double>::infinity()) continue;
+
+        while (current != -1) {
+            path.push_back(current);
+            current = previous[current];
         }
 
-        // Reverse the path to get it from start to destination
         reverse(path.begin(), path.end());
-        paths[currentNode] = path;  // Save the reconstructed path
+        paths[target] = path;  // ✅ Store the correct path
     }
 
-    // Return the distance map as a vector
-    vector<int> result;
-    for (auto& d : dist) {
-        result.push_back(d.second);
+    // Return distances in order of node ids (optional, adjust if needed)
+    vector<double> result;
+    for (const auto& pair : nodes) {
+        result.push_back(dist[pair.first]);
     }
 
     return result;
