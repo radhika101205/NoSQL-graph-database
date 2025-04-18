@@ -8,6 +8,11 @@ void Node::setProperty(const string& key, const PropertyValue& value) {
     properties[key] = value;
 }
 
+void Node::addProperty(const string& key, const PropertyValue& value) {
+    setProperty(key, value); // Simply calls setProperty internally
+}
+
+
 PropertyValue Node::getProperty(const string& key) const {
     auto it = properties.find(key);
     if (it != properties.end()) return it->second;

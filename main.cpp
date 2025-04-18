@@ -1,41 +1,44 @@
-#include "graphdb.hpp"
 #include <iostream>
-#include <unordered_map>
-#include <vector>
+#include "graphdb.hpp"
+
+using namespace std;
 
 int main() {
     GraphDB graph;
 
+    // Add nodes
     graph.addNode(1);
     graph.addNode(2);
     graph.addNode(3);
-    graph.addNode(4);
-    graph.addNode(5);
 
-    graph.addEdge(1, 1, 2, 2.0);
-    graph.addEdge(2, 1, 3, 2.0);
-    graph.addEdge(3, 2, 3, 3.0);
-    graph.addEdge(4, 2, 4, 1.0);
-    graph.addEdge(5, 3, 4, 1.0);
-    graph.addEdge(6, 4, 5, 1.0);
+    // Set node properties via GraphDB so indexing is updated
+    graph.setNodeProperty(1, "type", "Person");
+    graph.setNodeProperty(2, "type", "Company");
+    graph.setNodeProperty(3, "type", "Person");
 
-    std::unordered_map<int, std::vector<int>> paths;
-    std::vector<double> distances = graph.dijkstra(1, paths);
+    // Add edges
+    graph.addEdge(1, 1, 2, 1.0);
+    graph.addEdge(2, 2, 3, 2.0);
 
-    std::cout << "Distances from node 1:\n";
-    int i = 0;
-    for (const auto& pair : graph.getAllNodes()) {
-        std::cout << "Node " << pair.first << ": " << distances[i++] << std::endl;
+    // Set edge properties via GraphDB so indexing is updated
+    graph.setEdgeProperty(1, "relation", "works_at");
+    graph.setEdgeProperty(2, "relation", "owns");
+
+    // Lookup nodes with property
+    vector<int> personNodes = graph.findNodesByProperty("type", "Person");
+    cout << "Nodes with type 'Person': ";
+    for (int id : personNodes) {
+        cout << id << " ";
     }
+    cout << endl;
 
-    std::cout << "\nPaths from node 1:\n";
-    for (const auto& pair : paths) {
-        std::cout << "Path to Node " << pair.first << ": ";
-        for (int node : pair.second) {
-            std::cout << node << " ";
-        }
-        std::cout << std::endl;
+    // Lookup edges with property
+    vector<int> ownsEdges = graph.findEdgesByProperty("relation", "owns");
+    cout << "Edges with relation 'owns': ";
+    for (int id : ownsEdges) {
+        cout << id << " ";
     }
+    cout << endl;
 
     return 0;
 }

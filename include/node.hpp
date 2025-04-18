@@ -11,6 +11,8 @@ struct Node {
 
     Node(int nodeId);
     void setProperty(const string& key, const PropertyValue& value);
+    void addProperty(const std::string& key, const PropertyValue& value); 
+
     PropertyValue getProperty(const string& key) const;
     int getId() const { return id; }
 

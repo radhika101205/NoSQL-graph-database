@@ -37,6 +37,22 @@ void GraphDB::deleteNode(int nodeId) {
     nodes.erase(nodeId);
 }
 
+//Set node and edge properties
+void GraphDB::setNodeProperty(int nodeId, const std::string& key, const std::string& value) {
+    if (nodes.count(nodeId)) {
+        nodes[nodeId]->addProperty(key, value);
+        nodeIndex[key][value].insert(nodeId); // Update index
+    }
+}
+
+void GraphDB::setEdgeProperty(int edgeId, const std::string& key, const std::string& value) {
+    if (edges.count(edgeId)) {
+        edges[edgeId]->addProperty(key, value);
+        edgeIndex[key][value].insert(edgeId); // Update index
+    }
+}
+
+
 // Update node property
 void GraphDB::updateNodeProperty(int nodeId, const string& key, const PropertyValue& value) {
     if (!hasNode(nodeId)) {
@@ -44,6 +60,9 @@ void GraphDB::updateNodeProperty(int nodeId, const string& key, const PropertyVa
         return;
     }
     nodes[nodeId]->setProperty(key, value);
+    if (value.type == PropertyType::STRING) {
+        updateNodeIndex(nodeId, key, value.stringValue);
+    }
 }
 
 // Add an edge
@@ -83,6 +102,9 @@ void GraphDB::updateEdgeProperty(int edgeId, const string& key, const PropertyVa
         return;
     }
     edges[edgeId]->setProperty(key, value);
+    if (value.type == PropertyType::STRING) {
+        updateEdgeIndex(edgeId, key, value.stringValue);
+    }
 }
 
 // Utility
@@ -103,6 +125,16 @@ vector<int> GraphDB::getAdjacentNodes(int nodeId) const {
         }
     }
     return neighbors;
+}
+
+//Updating indexes
+
+void GraphDB::updateNodeIndex(int nodeId, const string& key, const string& value) {
+    nodeIndex[key][value].insert(nodeId);
+}
+
+void GraphDB::updateEdgeIndex(int edgeId, const string& key, const string& value) {
+    edgeIndex[key][value].insert(edgeId);
 }
 
 // BFS
@@ -127,6 +159,28 @@ void GraphDB::bfs(int startNodeId, function<void(int)> visit) {
             }
         }
     }
+}
+
+//Property based lookup methods
+
+vector<int> GraphDB::findNodesByProperty(const string& key, const string& value) {
+    vector<int> result;
+    if (nodeIndex.count(key) && nodeIndex[key].count(value)) {
+        for (int id : nodeIndex[key][value]) {
+            result.push_back(id);
+        }
+    }
+    return result;
+}
+
+vector<int> GraphDB::findEdgesByProperty(const string& key, const string& value) {
+    vector<int> result;
+    if (edgeIndex.count(key) && edgeIndex[key].count(value)) {
+        for (int id : edgeIndex[key][value]) {
+            result.push_back(id);
+        }
+    }
+    return result;
 }
 
 // DFS

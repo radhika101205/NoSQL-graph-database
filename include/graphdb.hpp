@@ -10,6 +10,7 @@
 #include <set>
 #include <queue>
 #include <stack>
+#include <unordered_set>
 
 using namespace std;
 
@@ -17,6 +18,13 @@ class GraphDB {
 private:
     unordered_map<int, shared_ptr<Node>> nodes;
     unordered_map<int, shared_ptr<Edge>> edges;
+
+    unordered_map<string, unordered_map<string, unordered_set<int>>> nodeIndex;
+    unordered_map<string, unordered_map<string, unordered_set<int>>> edgeIndex;
+
+    void updateNodeIndex(int nodeId, const string& key, const string& value);
+    void updateEdgeIndex(int edgeId, const string& key, const string& value);
+
 
 public:
     // Node operations
@@ -34,6 +42,15 @@ public:
     // Utility
     bool hasNode(int nodeId) const;
     bool hasEdge(int edgeId) const;
+
+    //Finding nodes and edges by property
+    vector<int> findNodesByProperty(const string& key, const string& value);
+    vector<int> findEdgesByProperty(const string& key, const string& value);
+
+    //Set node and edge properties
+    void setNodeProperty(int nodeId, const string& key, const string& value);
+    void setEdgeProperty(int edgeId, const string& key, const string& value);
+
 
     // Traversal
     void bfs(int startNodeId, function<void(int)> visit);

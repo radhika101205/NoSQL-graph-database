@@ -17,6 +17,8 @@ public:
 
     void setProperty(const string& key, const PropertyValue& value);
     PropertyValue getProperty(const string& key) const;
+    void addProperty(const std::string& key, const PropertyValue& value);  // Alias for setProperty
+
     const unordered_map<string, PropertyValue>& getProperties() const;
 
     int getId() const { return id; }

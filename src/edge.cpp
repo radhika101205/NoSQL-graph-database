@@ -9,6 +9,11 @@ void Edge::setProperty(const string& key, const PropertyValue& value) {
     properties[key] = value;
 }
 
+void Edge::addProperty(const std::string& key, const PropertyValue& value) {
+    setProperty(key, value);  
+}
+
+
 PropertyValue Edge::getProperty(const string& key) const {
     auto it = properties.find(key);
     if (it != properties.end()) return it->second;
