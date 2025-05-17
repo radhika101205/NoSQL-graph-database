@@ -16,12 +16,7 @@ int main() {
     graph.addNode(4);
     graph.addNode(5);
 
-    // Add properties to nodes
-    graph.getNode(1)->addProperty("type", string("Person"));
-    graph.getNode(2)->addProperty("type", string("Company"));
-    graph.getNode(3)->addProperty("type", string("Person"));
-    graph.getNode(4)->addProperty("type", string("Company"));
-    graph.getNode(5)->addProperty("type", string("Location"));
+    
 
     cout << "Nodes added with properties.\n";
 
@@ -33,29 +28,37 @@ int main() {
     graph.addEdge(5, 3, 4, 1.0);     // 3 -> 4
     graph.addEdge(6, 4, 5, 1.0);     // 4 -> 5
 
-    // Add properties to edges
-    graph.getEdge(1)->addProperty("relation", string("works_at"));
-    graph.getEdge(2)->addProperty("relation", string("owns"));
-    graph.getEdge(3)->addProperty("relation", string("partner"));
-    graph.getEdge(4)->addProperty("relation", string("connects"));
-    graph.getEdge(5)->addProperty("relation", string("linked"));
-    graph.getEdge(6)->addProperty("relation", string("located"));
+    graph.setNodeProperty(1, "type", "Person");
+    graph.setNodeProperty(2, "type", "Company");
+    graph.setNodeProperty(3, "type", "Person");
+    graph.setNodeProperty(4, "type", "Company");
+    graph.setNodeProperty(5, "type", "Location");
+
+    graph.setEdgeProperty(1, "relation", "works_at");
+    graph.setEdgeProperty(2, "relation", "owns");
+    graph.setEdgeProperty(3, "relation", "partner");
+    graph.setEdgeProperty(4, "relation", "connects");
+    graph.setEdgeProperty(5, "relation", "linked");
+    graph.setEdgeProperty(6, "relation", "located");
 
     cout << "Edges added with properties and weights.\n";
 
     // -------------------------
     cout << "\n=== SHORTEST PATH (DIJKSTRA) ===\n";
 
-    unordered_map<int, vector<int>> paths;
-    vector<double> distances = graph.dijkstra(1, paths);  // from node 1
+    unordered_map<int, vector<int>> paths; 
+    
+    unordered_map<int, double> distances = graph.dijkstra(1, paths);
 
     for (auto& pair : paths) {
         cout << "Shortest path to node " << pair.first << ": ";
         for (int id : pair.second) {
             cout << id << " ";
         }
-        cout << "(Distance: " << distances[pair.first - 1] << ")\n"; // assuming node IDs start from 1
+        cout << "(Distance: " << distances[pair.first] << ")\n";
     }
+    
+    
 
     // -------------------------
     cout << "\n=== INDEXING LOOKUP ===\n";

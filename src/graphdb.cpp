@@ -213,7 +213,7 @@ void GraphDB::dfs(int startNodeId, function<void(int)> visit) {
 
 //Dijkstra's algo
 
-vector<double> GraphDB::dijkstra(int startNodeId, unordered_map<int, vector<int>>& paths) {
+unordered_map<int, double> GraphDB::dijkstra(int startNodeId, unordered_map<int, vector<int>>& paths) {
     // Step 1: Initialize distances and priority queue
     unordered_map<int, double> dist; // Node ID -> Distance
     unordered_map<int, int> previous; // Node ID -> Previous node
@@ -256,28 +256,39 @@ vector<double> GraphDB::dijkstra(int startNodeId, unordered_map<int, vector<int>
     }
 
     // Reconstruct paths from startNode to every other node
-    for (const auto& pair : nodes) {
-        int target = pair.first;
+    // for (const auto& pair : nodes) {
+    //     int target = pair.first;
+    //     vector<int> path;
+    //     int current = target;
+
+    //     // Skip unreachable nodes
+    //     if (dist[current] == numeric_limits<double>::infinity()) continue;
+
+    //     while (current != -1) {
+    //         path.push_back(current);
+    //         current = previous[current];
+    //     }
+
+    //     reverse(path.begin(), path.end());
+    //     paths[target] = path;  // ✅ Store the correct path
+    // }
+
+    // // Return distances in order of node ids (optional, adjust if needed)
+    // vector<double> result;
+    // for (const auto& pair : nodes) {
+    //     result.push_back(dist[pair.first]);
+    // }
+
+    // return result;
+    for (const auto& pair : dist) {
+        int nodeId = pair.first;
         vector<int> path;
-        int current = target;
-
-        // Skip unreachable nodes
-        if (dist[current] == numeric_limits<double>::infinity()) continue;
-
-        while (current != -1) {
-            path.push_back(current);
-            current = previous[current];
+        for (int at = nodeId; at != -1; at = previous[at]) {
+            path.insert(path.begin(), at);
         }
-
-        reverse(path.begin(), path.end());
-        paths[target] = path;  // ✅ Store the correct path
+        if (!path.empty() && path[0] == startNodeId)
+            paths[nodeId] = path;
     }
-
-    // Return distances in order of node ids (optional, adjust if needed)
-    vector<double> result;
-    for (const auto& pair : nodes) {
-        result.push_back(dist[pair.first]);
-    }
-
-    return result;
+    
+    return dist;
 }

@@ -58,7 +58,7 @@ public:
     vector<int> getAdjacentNodes(int nodeId) const;
 
     //Dijstra's algorithm
-    vector<double> dijkstra(int startNodeId,unordered_map<int, vector<int>>& paths);
+    unordered_map<int, double> dijkstra(int startNodeId, unordered_map<int, vector<int>>& paths);
 
 
     //Getting all nodes
